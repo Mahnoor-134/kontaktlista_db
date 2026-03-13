@@ -13,12 +13,13 @@ import java.util.ArrayList;
 public class NewJFrame extends javax.swing.JFrame {
 
     // Kontakt[] konlista = new Kontakt[100];
-    static ArrayList<Kontakt> konlista = new ArrayList<>();
+    //  static ArrayList<Kontakt> konlista = new ArrayList<>();
     FileManager fmgr = new FileManager();
-    //int antalkontakt = 0;
+    DbManager db = new DbManager();
 
-    /* Kontakt kon = new Kontakt(förnamn, efternamn, telefonnummer);
-        konLista.add(kon);
+    //int antalkontakt = 0;
+    //  Kontakt kon = new Kontakt(förnamn, efternamn, telefonnummer);
+    /*    konLista.add(kon);
         Kontakt kon1 = konLista.get(0);
         for (int i = 0; i < konLista.size(); i++) {
             System.out.println(i);
@@ -189,11 +190,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void fornamn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fornamn1ActionPerformed
         this.TextA.setText("");
-        for (int i = 0; i < konlista.size(); i++) {
-            this.TextA.append(konlista.get(i).getfornamn() + "\t" + konlista.get(i).getefternamn() + "\t" + konlista.get(i).gettelefonnummer() + "\n");
-            //this.TextA.append(konlista[i].getfornamn() + "\t" + konlista[i].getefternamn() + "\t" + konlista[i].gettelefonnummer() + "\n");
-            // this.TextA.append(konlista.get(i) + toString() + "/n");
-        }
+
+       // for (int i = 0; i < konlista.size(); i++) {
+         //   this.TextA.append(konlista.get(i).getfornamn() + "\t" + konlista.get(i).getefternamn() + "\t" + konlista.get(i).gettelefonnummer() + "\n");
+
+        //}
     }//GEN-LAST:event_fornamn1ActionPerformed
 
     private void tbxFörnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbxFörnamnActionPerformed
@@ -213,13 +214,16 @@ public class NewJFrame extends javax.swing.JFrame {
         if (förnamn.contentEquals("") && efternamn.contentEquals("") && telefonnummer.contentEquals("")) { // om alla rader är tomma, finns ingen infromation- körs ingenting
 
         } else { //otherwise 
-            Kontakt kon = new Kontakt(förnamn, efternamn, telefonnummer);
-            konlista.add(kon);
+
+            // konlista.add(kon);
             if (fornamn1.isSelected()) { // man man väljer fornman först
                 this.TextA.setText(""); //tomma rad
-                for (int i = 0; i < konlista.size(); i++) {  //loop för att läsa allt information
-                    this.TextA.append(konlista.get(i).getfornamn() + "\t" + konlista.get(i).getefternamn() + "\t" + konlista.get(i).gettelefonnummer() + "\n"); //skriva den i textarean 
-                }
+                
+                Kontakt kon = new Kontakt(förnamn, efternamn, telefonnummer);
+                
+              //  for (int i = 0; i < konlista.size(); i++) {  //loop för att läsa allt information
+                //    this.TextA.append(konlista.get(i).getfornamn() + "\t" + konlista.get(i).getefternamn() + "\t" + konlista.get(i).gettelefonnummer() + "\n"); //skriva den i textarean 
+              //  }
 
                 //Kontakt kon1 = konlista.get(0);
                 //for (int i = 0; i < konlista.size(); i++) {
@@ -230,9 +234,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 // konLista[antalkontakt] = new Kontakt(förnamn, efternamn, telefonnummer);
                 // this.TextA.append(konlista[antalkontakt].getefternamn() + "\t" + konlista[antalkontakt].getfornamn() + "\t" + konlista[antalkontakt].gettelefonnummer() + "\n");
                 //this.TextA.append(konlista.get(i) + toString() + "/n");
-                for (int i = 0; i < konlista.size(); i++) {
-                    this.TextA.append(konlista.get(i).getefternamn() + "\t" + konlista.get(i).getfornamn() + "\t" + konlista.get(i).gettelefonnummer() + "\n");
-                }
+                //for (int i = 0; i < konlista.size(); i++) {
+               //     this.TextA.append(konlista.get(i).getefternamn() + "\t" + konlista.get(i).getfornamn() + "\t" + konlista.get(i).gettelefonnummer() + "\n");
+              //  }
 
             }
 
@@ -247,24 +251,24 @@ public class NewJFrame extends javax.swing.JFrame {
     private void efternamn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_efternamn1ActionPerformed
         this.TextA.setText("");
 
-        for (int i = 0; i < konlista.size(); i++) {
+   /*   for (int i = 0; i < konlista.size(); i++) {
             this.TextA.append(konlista.get(i).getefternamn() + "\t" + konlista.get(i).getfornamn() + "\t" + konlista.get(i).gettelefonnummer() + "\n");
-        }
+        }*/  
 
     }//GEN-LAST:event_efternamn1ActionPerformed
 
     private void sparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sparaActionPerformed
 
-        fmgr.saveToFile(konlista);
+//        fmgr.saveToFile(konlista);
     }//GEN-LAST:event_sparaActionPerformed
 
     private void hämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hämtaActionPerformed
 
-        konlista = FileManager.readFromFile();
+      /*   konlista = FileManager.readFromFile();
         this.TextA.setText("");
         for (int i = 0; i < konlista.size(); i++) {
             this.TextA.append(konlista.get(i).getfornamn() + "\t" + konlista.get(i).getefternamn() + "\t" + konlista.get(i).gettelefonnummer() + "\n");
-        }
+        }*/  
     }//GEN-LAST:event_hämtaActionPerformed
 
     /**
