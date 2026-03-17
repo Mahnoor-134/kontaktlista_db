@@ -51,31 +51,32 @@ public class DbManager {
      * @return non zero value on succsessfull insert, zero value on none
      * succsessful insert.
      */
-    /*   public int insert(Kontakt kontakt) {
+    public int insert(Kontakt kontakt) {
         int res = 0;
 
-        // Check for active connection, not written yet
+        // Check for active connection, not written yet 
         //if (connected()) {
-            try {
-                String sql = "insert into tabellnamn(egenskap1, egenskap2)"
-                        + " VALUES (?, ?)";
-                PreparedStatement stmt
-                        = conn.prepareStatement(sql);
+        try {
+            String sql = "insert into kontakt(firstname, lastname, phonenumber)"
+                    + " VALUES (?, ?, ?)";
+            PreparedStatement stmt
+                    = conn.prepareStatement(sql);
 
-                // Set Parameters
-                stmt.setString(1, kontakt.getEgenskap1());
-                stmt.setInt(4, kontakt.getEgenskap2());
+            // Set Parameters
+            stmt.setString(1, kontakt.getfornamn());
+            stmt.setString(2, kontakt.getefternamn());
+            stmt.setString(3, kontakt.gettelefonnummer());
 
-                // Execute SQL query
-                res = stmt.executeUpdate();
-                System.out.println(res + " record inserted");
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
+            // Execute SQL query
+            res = stmt.executeUpdate();
+            System.out.println(res + " record inserted");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         //}
         return res;
     }
-     */
+
     /**
      *
      * Metod for retriveing all the records in the database
@@ -95,6 +96,7 @@ public class DbManager {
         //}
         return rs;
     }
+    
 
     /**
      * Method for updating a contact in the datebase by it´s id number.
