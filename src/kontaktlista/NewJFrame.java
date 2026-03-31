@@ -4,7 +4,9 @@
  */
 package kontaktlista;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -46,8 +48,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         tbxFörnamn = new javax.swing.JTextField();
         tbxEfternamn = new javax.swing.JTextField();
-        fornamn1 = new javax.swing.JRadioButton();
-        efternamn1 = new javax.swing.JRadioButton();
+        rbtfornamn = new javax.swing.JRadioButton();
+        rbnefternamn = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TextA = new javax.swing.JTextArea();
         läggtill = new javax.swing.JButton();
@@ -70,20 +72,20 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        rbtnGroup.add(fornamn1);
-        fornamn1.setSelected(true);
-        fornamn1.setText("Förnamn Först");
-        fornamn1.addActionListener(new java.awt.event.ActionListener() {
+        rbtnGroup.add(rbtfornamn);
+        rbtfornamn.setSelected(true);
+        rbtfornamn.setText("Förnamn Först");
+        rbtfornamn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fornamn1ActionPerformed(evt);
+                rbtfornamnActionPerformed(evt);
             }
         });
 
-        rbtnGroup.add(efternamn1);
-        efternamn1.setText("Efternamn Först");
-        efternamn1.addActionListener(new java.awt.event.ActionListener() {
+        rbtnGroup.add(rbnefternamn);
+        rbnefternamn.setText("Efternamn Först");
+        rbnefternamn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                efternamn1ActionPerformed(evt);
+                rbnefternamnActionPerformed(evt);
             }
         });
 
@@ -129,9 +131,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(9, 9, 9)
-                        .addComponent(fornamn1)
+                        .addComponent(rbtfornamn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(efternamn1)
+                        .addComponent(rbnefternamn)
                         .addGap(67, 67, 67))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -180,21 +182,18 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fornamn1)
-                    .addComponent(efternamn1))
+                    .addComponent(rbtfornamn)
+                    .addComponent(rbnefternamn))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fornamn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fornamn1ActionPerformed
+    private void rbtfornamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtfornamnActionPerformed
         this.TextA.setText("");
-
-        // for (int i = 0; i < konlista.size(); i++) {
-        //   this.TextA.append(konlista.get(i).getfornamn() + "\t" + konlista.get(i).getefternamn() + "\t" + konlista.get(i).gettelefonnummer() + "\n");
-        //}
-    }//GEN-LAST:event_fornamn1ActionPerformed
+        skrivUtFörnamn();
+    }//GEN-LAST:event_rbtfornamnActionPerformed
 
     private void tbxFörnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbxFörnamnActionPerformed
         // TODO add your handling code here:
@@ -208,7 +207,7 @@ public class NewJFrame extends javax.swing.JFrame {
         this.tbxEfternamn.setText(""); // tömmer textboxer
 
         String telefonnummer = this.jTextField1.getText();// läser av textboxen
-        this.jTextField1.setText(""); // tömmer textboxer
+        this.jTextField1.setText("");
 
         if (förnamn.contentEquals("") && efternamn.contentEquals("") && telefonnummer.contentEquals("")) { // om alla rader är tomma, finns ingen infromation- körs ingenting
 
@@ -216,24 +215,13 @@ public class NewJFrame extends javax.swing.JFrame {
             Kontakt kon = new Kontakt(förnamn, efternamn, telefonnummer);
             db.insert(kon);
 
-            if (fornamn1.isSelected()) { // man man väljer fornman först
-                this.TextA.setText(""); //tomma rad
+            if (rbtfornamn.isSelected()) { // man man väljer fornman först
+                //    this.TextA.setText(""); //tomma rad
+                skrivUtFörnamn();
 
-                //  for (int i = 0; i < konlista.size(); i++) {  //loop för att läsa allt information
-                //    this.TextA.append(konlista.get(i).getfornamn() + "\t" + konlista.get(i).getefternamn() + "\t" + konlista.get(i).gettelefonnummer() + "\n"); //skriva den i textarean 
-                //  }
-                //Kontakt kon1 = konlista.get(0);
-                //for (int i = 0; i < konlista.size(); i++) {
-                //  System.out.println(i);
-                //}
             } else {
-                this.TextA.setText("");
-                // konLista[antalkontakt] = new Kontakt(förnamn, efternamn, telefonnummer);
-                // this.TextA.append(konlista[antalkontakt].getefternamn() + "\t" + konlista[antalkontakt].getfornamn() + "\t" + konlista[antalkontakt].gettelefonnummer() + "\n");
-                //this.TextA.append(konlista.get(i) + toString() + "/n");
-                //for (int i = 0; i < konlista.size(); i++) {
-                //     this.TextA.append(konlista.get(i).getefternamn() + "\t" + konlista.get(i).getfornamn() + "\t" + konlista.get(i).gettelefonnummer() + "\n");
-                //  }
+
+                skrivUtEfternamn();
 
             }
 
@@ -241,32 +229,63 @@ public class NewJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_läggtillActionPerformed
 
-    private void skrivUtFörnamn(){
+    private void skrivUtFörnamn() {
         this.TextA.setText("");
+        ResultSet rs = db.getAllData();
+        if (rs != null) {
+            try {
+                while (rs.next()) {
+                    this.TextA.append(rs.getInt("kontaktid") + "\t"
+                            + rs.getString("firstname") + "\t"
+                            + rs.getString("lastname") + "\t"
+                            + rs.getString("phonenumber") + "\n");
+                }
+            } catch (SQLException ex) {
+                System.out.println("Ingen data.");
+            }
+        } else {
+            System.out.println("Ingen data från databasen, kontrollera anslutningen.");
+        }
+
     }
-     private void skrivUtEfternamn(){
+
+    private void skrivUtEfternamn() {
         this.TextA.setText("");
+
+        ResultSet rs = db.getAllData();
+        if (rs != null) {
+            try {
+                while (rs.next()) {
+                    this.TextA.append(rs.getInt("kontaktid") + "\t"
+                            + rs.getString("lastname") + "\t"
+                            + rs.getString("firstname") + "\t"
+                            + rs.getString("phonenumber") + "\n");
+                }
+            } catch (SQLException ex) {
+                System.out.println("Ingen data.");
+            }
+        } else {
+            System.out.println("Ingen data från databasen, kontrollera anslutningen.");
+        }
     }
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void efternamn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_efternamn1ActionPerformed
+    private void rbnefternamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbnefternamnActionPerformed
         this.TextA.setText("");
+        skrivUtEfternamn();
 
-        /*   for (int i = 0; i < konlista.size(); i++) {
-            this.TextA.append(konlista.get(i).getefternamn() + "\t" + konlista.get(i).getfornamn() + "\t" + konlista.get(i).gettelefonnummer() + "\n");
-        }*/
-
-    }//GEN-LAST:event_efternamn1ActionPerformed
+    }//GEN-LAST:event_rbnefternamnActionPerformed
 
     private void sparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sparaActionPerformed
 
-//        fmgr.saveToFile(konlista);
+
     }//GEN-LAST:event_sparaActionPerformed
 
     private void hämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hämtaActionPerformed
-
+        this.TextA.setText("");
+        skrivUtFörnamn();
         /*   konlista = FileManager.readFromFile();
         this.TextA.setText("");
         for (int i = 0; i < konlista.size(); i++) {
@@ -301,8 +320,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea TextA;
-    private javax.swing.JRadioButton efternamn1;
-    private javax.swing.JRadioButton fornamn1;
     private javax.swing.JButton hämta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -311,6 +328,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton läggtill;
+    private javax.swing.JRadioButton rbnefternamn;
+    private javax.swing.JRadioButton rbtfornamn;
     private javax.swing.ButtonGroup rbtnGroup;
     private javax.swing.JButton spara;
     private javax.swing.JTextField tbxEfternamn;
