@@ -19,6 +19,7 @@ public class NewJFrame extends javax.swing.JFrame {
     FileManager fmgr = new FileManager();
     DbManager db = new DbManager();
     String idnummer;
+    int number;
 
     //int antalkontakt = 0;
     //  Kontakt kon = new Kontakt(förnamn, efternamn, telefonnummer);
@@ -32,6 +33,15 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() {
         initComponents();
+        if (rbtfornamn.isSelected()) { // man man väljer fornman först
+                //    this.TextA.setText(""); //tomma rad
+                skrivUtFörnamn();
+
+            } else {
+
+                skrivUtEfternamn();
+
+            }
     }
 
     /**
@@ -56,8 +66,6 @@ public class NewJFrame extends javax.swing.JFrame {
         läggtill = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        spara = new javax.swing.JButton();
-        hämta = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         deleteTxt = new javax.swing.JTextField();
 
@@ -111,20 +119,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Telefonnummer");
 
-        spara.setText("spara");
-        spara.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sparaActionPerformed(evt);
-            }
-        });
-
-        hämta.setText("hämta");
-        hämta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hämtaActionPerformed(evt);
-            }
-        });
-
         btnDelete.setText("delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,26 +154,21 @@ public class NewJFrame extends javax.swing.JFrame {
                                 .addComponent(btnDelete))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tbxFörnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tbxEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(läggtill)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(37, 37, 37)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(spara)
-                                    .addComponent(hämta))))
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tbxFörnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tbxEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(109, 109, 109))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(läggtill)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(25, 25, 25))))
         );
         layout.setVerticalGroup(
@@ -187,11 +176,7 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(spara)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hämta)
-                        .addGap(26, 26, 26)
+                        .addGap(84, 84, 84)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDelete)
                             .addComponent(deleteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -309,40 +294,24 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        db.delete(number);
-        if (rbtfornamn.isSelected()) { // man man väljer fornman först
-                //    this.TextA.setText(""); //tomma rad
-                skrivUtFörnamn();
-
-            } else {
-
-                skrivUtEfternamn();
-
-            }
-        
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void hämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hämtaActionPerformed
-        this.TextA.setText("");
-        skrivUtFörnamn();
-        /*   konlista = FileManager.readFromFile();
-        this.TextA.setText("");
-        for (int i = 0; i < konlista.size(); i++) {
-            this.TextA.append(konlista.get(i).getfornamn() + "\t" + konlista.get(i).getefternamn() + "\t" + konlista.get(i).gettelefonnummer() + "\n");
-        }*/
-    }//GEN-LAST:event_hämtaActionPerformed
-
-    private void sparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sparaActionPerformed
-
-    }//GEN-LAST:event_sparaActionPerformed
-
-    private void deleteTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteTxtActionPerformed
-
         idnummer = this.deleteTxt.getText();
         this.deleteTxt.setText("");
-        int number = Integer.parseInt(idnummer);
-        
-        
+        number = Integer.parseInt(idnummer);
+        db.delete(number);
+
+        if (rbtfornamn.isSelected()) { // man man väljer fornman först
+            //    this.TextA.setText(""); //tomma rad
+            skrivUtFörnamn();
+
+        } else {
+
+            skrivUtEfternamn();
+
+        }
+
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void deleteTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteTxtActionPerformed
 
 
     }//GEN-LAST:event_deleteTxtActionPerformed
@@ -376,7 +345,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea TextA;
     private javax.swing.JButton btnDelete;
     private javax.swing.JTextField deleteTxt;
-    private javax.swing.JButton hämta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -387,7 +355,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbnefternamn;
     private javax.swing.JRadioButton rbtfornamn;
     private javax.swing.ButtonGroup rbtnGroup;
-    private javax.swing.JButton spara;
     private javax.swing.JTextField tbxEfternamn;
     private javax.swing.JTextField tbxFörnamn;
     // End of variables declaration//GEN-END:variables

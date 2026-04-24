@@ -96,11 +96,12 @@ public class DbManager {
         //}
         return rs;
     }
-    
 
     /**
      * Method for updating a contact in the datebase by it´s id number.
      *
+     * @param number
+     * @param idnummer
      * @param kontakt object to be updated in the database
      */
     /*
@@ -124,4 +125,17 @@ public class DbManager {
 
     }
      */
+    public void delete(int number) {
+        int res;
+        int id = number;
+        try {
+            String sql = "DELETE  FROM kontakt WHERE kontaktid = " + id;
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            res = stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
